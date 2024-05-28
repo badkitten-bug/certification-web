@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+import IEEELogo from "../images/ieee_untelsw.png";
+---
+
+<nav class="bg-blue-900 print:hidden">
+  <div class="max-w-screen-xl mx-auto p-4 flex items-center justify-between">
+    <Image
+      class="w-60 hidden md:block"
+      src={IEEELogo}
+      alt="Logo IEEE UNTELS"
+      width={300}
+    />
+    <a href="/" class="text-xl text-white font-semibold tracking-tight"
+      >CERTIFICADOS: IEEE UNIVERSIDAD NACIONAL TECNOLOGICA DE LIMA SUR
+    </a>
+    <slot />
+  </div>
+</nav>

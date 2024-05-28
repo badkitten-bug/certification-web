@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import dayjs from 'dayjs';
+import exMx from 'dayjs/locale/es-mx';
+import FullPage from '../components/FullPage.astro';
+import DownloadButton from '../components/DownloadButton.astro';
+
+dayjs.locale(exMx);
+
+const { data } = Astro.params;
+
+if (!data) return Astro.redirect('/');
+
+const information = Buffer.from(data, 'base64').toString('utf-8');
+
+const [names, carrier, date] = decodeURIComponent(information).split(';');
+
+if (!names || !carrier || !date) return Astro.redirect('/');
+
+const formatedDate = dayjs(date);
+
+if (!formatedDate.isValid()) return Astro.redirect('/');
+---
+
+<Layout
+	title={`Título profesional de ${names}`}
+	description={`Tengo el honor de compartirles mi siguiente logro: He recibido mi título profesional en la prestigiosa Universidad Sideral Carrión en la carrera de ${carrier}`}
+>
+	<DownloadButton slot='navbar-button' />
+	<FullPage names={names} carrier={carrier} date={formatedDate} />
+</Layout>

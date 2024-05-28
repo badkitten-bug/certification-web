@@ -1,0 +1,143 @@
+---
+import { Image } from "astro:assets";
+
+import ieeeLogo from "../images/ieee_untels_rgb_stacked_blue.png";
+import escudo from "../images/escudo.png";
+import firmaSideral from "../images/firma sideral.png";
+import firmaJona from "../images/firma jona.png";
+import dayjs from "dayjs";
+
+interface Props {
+  names?: string;
+  titlePresentation?: string;
+  carrier?: string;
+  date: dayjs.Dayjs;
+}
+
+const { names, carrier, date, titlePresentation } = Astro.props;
+
+---
+
+<div
+  id="diplome"
+  class="max-w-screen-xl mx-auto mt-8 p-4 text-lg md:text-2xl font-paragraph text-center select-none bg-white shadow-lg rounded-lg"
+>
+  <header class="flex justify-between items-center mt-6">
+    <div class="hidden flex-col items-center gap-2 md:flex invisible">
+      <small class="block font-bold text-base">República del Perú</small>
+      <Image class="w-10" src={escudo} alt="Escudo del Perú" width={150} />
+    </div>
+    <Image
+      class="w-60 hidden md:block"
+      src={ieeeLogo}
+      alt="Logo IEEE UNTELS"
+      width={600}
+    />
+  </header>
+  <main class="mt-10">
+    <div class="flex-grow">
+      <h1 class="text-4xl md:text-5xl font-heading mb-5">CERTIFICADO</h1>
+      <span>Por el presente certifica que</span>
+    </div>
+    {
+      names ? (
+        <b class="block text-2xl text-center my-5 w-full font-title font-bold tracking-tighter md:text-5xl">
+          {names}
+        </b>
+      ) : (
+        <input
+          id="names"
+          type="text"
+          class="p-0 text-2xl text-center my-5 w-full font-title font-bold tracking-tighter bg-transparent focus:outline-none md:text-5xl"
+          placeholder="[Nombres y apellidos]"
+          name="names"
+          autocomplete="off"
+        />
+      )
+    }
+    <p>ha participado en "{titlePresentation ? titlePresentation : ''}" en calidad de:</p>
+    {
+      titlePresentation ? (
+        <b class="block text-2xl text-center my-5 w-full font-title font-bold tracking-tighter md:text-5xl">
+          {titlePresentation}
+        </b>
+      ) : (
+        <input
+          id="titlePresentation"
+          type="text"
+          class="p-0 text-2xl text-center my-5 w-full font-title font-bold tracking-tighter bg-transparent focus:outline-none md:text-5xl"
+          placeholder="[Título de la presentación]"
+          name="titlePresentation"
+          autocomplete="off"
+        />
+      )
+    }
+    {
+      carrier ? (
+        <b class="block text-2xl text-center my-5 w-full font-title font-bold tracking-tighter md:text-5xl">
+          {carrier}
+        </b>
+      ) : (
+        <input
+          id="carrier"
+          type="text"
+          class="p-0 text-2xl text-center my-5 w-full font-title font-bold tracking-tighter bg-transparent focus:outline-none md:text-5xl"
+          placeholder="[Carrera profesional]"
+          name="carrier"
+          autocomplete="off"
+        />
+      )
+    }
+    <p>
+      Evento organizado por el Capítulo Técnico IEEE ... de la Universidad
+      Nacional Tecnológica de Lima Sur. Realizado en modalidad presencial el ..
+      de ...... del 202...
+    </p>
+    <span class="block my-10 text-right italic"
+      >Otorgado el <time datetime={date.toISOString()}
+        >{date.format("DD [de] MMMM [del] YYYY")}</time
+      ></span
+    >
+  </main>
+  <footer class="hidden justify-around items-center text-base md:flex">
+    <div class="flex flex-col items-center">
+      <Image
+        class="w-auto h-20 lg:h-36"
+        src={firmaSideral}
+        alt="Firma Sideral"
+        width={300}
+        height={145}
+      />
+      <b class="tracking-tight">M.Sc. Fredy Campos Aguado</b>
+      <span> IEEE UNTELS Student Branch Counselor</span>
+    </div>
+    <div class="flex flex-col items-center">
+      <Image
+        class="w-auto h-20 lg:h-36"
+        src={firmaJona}
+        alt="Firma Jona"
+        width={300}
+        height={145}
+      />
+      <b class="tracking-tight">Jona Roma Mar</b>
+      <span>Supervisor de títulos</span>
+    </div>
+  </footer>
+</div>
+
+<style>
+  @font-face {
+    font-family: "Bold Ayres";
+    src: url("/fonts/BoldAyres.ttf");
+  }
+
+  @font-face {
+    font-family: "Bodoni Elegant";
+    src: url("/fonts/BodoniElegant.otf");
+  }
+
+  @font-face {
+    font-family: "Kievit Serif";
+    src: url("/fonts/KievitSerif.ttf");
+  }
+</style>
