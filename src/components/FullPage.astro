@@ -3,8 +3,7 @@ import { Image } from "astro:assets";
 
 import ieeeLogo from "../images/ieee_untels_rgb_stacked_blue.png";
 import escudo from "../images/escudo.png";
-import firmaSideral from "../images/firma sideral.png";
-import firmaJona from "../images/firma jona.png";
+import firmaSteve from "../images/firma steve.png";
 import dayjs from "dayjs";
 
 interface Props {
@@ -103,8 +102,8 @@ const { names, carrier, date, titlePresentation } = Astro.props;
     <div class="flex flex-col items-center">
       <Image
         class="w-auto h-20 lg:h-36"
-        src={firmaSideral}
-        alt="Firma Sideral"
+        src={firmaSteve}
+        alt="Firma Steve"
         width={300}
         height={145}
       />
@@ -114,12 +113,12 @@ const { names, carrier, date, titlePresentation } = Astro.props;
     <div class="flex flex-col items-center">
       <Image
         class="w-auto h-20 lg:h-36"
-        src={firmaJona}
-        alt="Firma Jona"
+        src={firmaSteve}
+        alt="Firma Steve"
         width={300}
         height={145}
       />
-      <b class="tracking-tight">Jona Roma Mar</b>
+      <b class="tracking-tight">Steve Gomez</b>
       <span>Supervisor de títulos</span>
     </div>
   </footer>
