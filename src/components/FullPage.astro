@@ -8,13 +8,29 @@ import dayjs from "dayjs";
 
 interface Props {
   names?: string;
+  participate?: string;
+  chapter?: string;
   titlePresentation?: string;
   carrier?: string;
+  mode?: string;
+  dd?: string;
+  mm?: string;
+  yy?: string;
   date: dayjs.Dayjs;
 }
 
-const { names, carrier, date, titlePresentation } = Astro.props;
-
+const {
+  names,
+  carrier,
+  chapter,
+  date,
+  participate,
+  mode,
+  dd,
+  mm,
+  yy,
+  titlePresentation,
+} = Astro.props;
 ---
 
 <div
@@ -33,11 +49,13 @@ const { names, carrier, date, titlePresentation } = Astro.props;
       width={600}
     />
   </header>
+
   <main class="mt-10">
     <div class="flex-grow">
       <h1 class="text-4xl md:text-5xl font-heading mb-5">CERTIFICADO</h1>
       <span>Por el presente certifica que</span>
     </div>
+
     {
       names ? (
         <b class="block text-2xl text-center my-5 w-full font-title font-bold tracking-tighter md:text-5xl">
@@ -54,7 +72,24 @@ const { names, carrier, date, titlePresentation } = Astro.props;
         />
       )
     }
-    <p>ha participado en "{titlePresentation ? titlePresentation : ''}" en calidad de:</p>
+    <p>
+      ha participado en "{
+        participate ? (
+          <b class="block tracking-tighter bg-transparent focus:outline-none">
+            {names}
+          </b>
+        ) : (
+          <input
+            id="names"
+            type="text"
+            class="p-0 text-center tracking-tighter bg-transparent focus:outline-none"
+            placeholder="[curso / taller]"
+            name="names"
+            autocomplete="off"
+          />
+        )
+      }" en calidad de:
+    </p>
     {
       titlePresentation ? (
         <b class="block text-2xl text-center my-5 w-full font-title font-bold tracking-tighter md:text-5xl">
@@ -64,33 +99,92 @@ const { names, carrier, date, titlePresentation } = Astro.props;
         <input
           id="titlePresentation"
           type="text"
-          class="p-0 text-2xl text-center my-5 w-full font-title font-bold tracking-tighter bg-transparent focus:outline-none md:text-5xl"
+          class="p-0 text-2xl text-center my-5 w-full font-bold tracking-tighter bg-transparent focus:outline-none md:text-5xl"
           placeholder="[Título de la presentación]"
           name="titlePresentation"
           autocomplete="off"
         />
       )
     }
-    {
-      carrier ? (
-        <b class="block text-2xl text-center my-5 w-full font-title font-bold tracking-tighter md:text-5xl">
-          {carrier}
-        </b>
-      ) : (
-        <input
-          id="carrier"
-          type="text"
-          class="p-0 text-2xl text-center my-5 w-full font-title font-bold tracking-tighter bg-transparent focus:outline-none md:text-5xl"
-          placeholder="[Carrera profesional]"
-          name="carrier"
-          autocomplete="off"
-        />
-      )
-    }
     <p>
-      Evento organizado por el Capítulo Técnico IEEE ... de la Universidad
-      Nacional Tecnológica de Lima Sur. Realizado en modalidad presencial el ..
-      de ...... del 202...
+      Evento organizado por {
+        chapter ? (
+          <b class="block tracking-tighter bg-transparent focus:outline-none">
+            {names}
+          </b>
+        ) : (
+          <input
+            id="names"
+            type="text"
+            class="p-0 text-center tracking-tighter bg-transparent focus:outline-none"
+            placeholder="[rama / capitulo]"
+            name="names"
+            autocomplete="off"
+          />
+        )
+      } de la Universidad Nacional Tecnológica de Lima Sur. Realizado en modalidad
+      {
+        mode ? (
+          <b class="block tracking-tighter bg-transparent focus:outline-none">
+            {names}
+          </b>
+        ) : (
+          <input
+            id="names"
+            type="text"
+            class="p-0 text-center tracking-tighter bg-transparent focus:outline-none"
+            placeholder="[presencial / remoto]"
+            name="names"
+            autocomplete="off"
+          />
+        )
+      } el {
+        dd ? (
+          <b class="block tracking-tighter bg-transparent focus:outline-none">
+            {names}
+          </b>
+        ) : (
+          <input
+            id="names"
+            type="text"
+            class="p-0 text-center tracking-tighter bg-transparent focus:outline-none"
+            placeholder="[día]"
+            name="names"
+            autocomplete="off"
+          />
+        )
+      }
+      de {
+        mm ? (
+          <b class="block tracking-tighter bg-transparent focus:outline-none">
+            {names}
+          </b>
+        ) : (
+          <input
+            id="names"
+            type="text"
+            class="p-0 text-center tracking-tighter bg-transparent focus:outline-none"
+            placeholder="[mes]"
+            name="names"
+            autocomplete="off"
+          />
+        )
+      } del {
+        yy ? (
+          <b class="block tracking-tighter bg-transparent focus:outline-none">
+            {names}
+          </b>
+        ) : (
+          <input
+            id="names"
+            type="text"
+            class="p-0 text-center tracking-tighter bg-transparent focus:outline-none"
+            placeholder="[año]"
+            name="names"
+            autocomplete="off"
+          />
+        )
+      }
     </p>
     <span class="block my-10 text-right italic"
       >Otorgado el <time datetime={date.toISOString()}
@@ -98,6 +192,7 @@ const { names, carrier, date, titlePresentation } = Astro.props;
       ></span
     >
   </main>
+
   <footer class="hidden justify-around items-center text-base md:flex">
     <div class="flex flex-col items-center">
       <Image
