@@ -1,20 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-import dayjs from 'dayjs';
-import exMx from 'dayjs/locale/es-mx';
-import FullPage from '../components/FullPage.astro';
-import GenerateButton from '../components/GenerateButton.astro';
+import dayjs from "dayjs";
+import exMx from "dayjs/locale/es-mx";
+import FullPage from "../components/FullPage.astro";
+import GenerateButton from "../components/GenerateButton.astro";
 
 dayjs.locale(exMx);
 
 const today = dayjs();
+
+import { db, User } from "astro:db";
+const users = await db.select().from(User);
 ---
 
 <Layout
-	title='Generador de certificados | IEEE SB UNTELS'
-	description='Generador de certificaods para la Universidad Nacional Tecnológica de Lima Sur.'
+  title="Generador de certificados | IEEE SB UNTELS"
+  description="Generador de certificaods para la Universidad Nacional Tecnológica de Lima Sur."
 >
-	<GenerateButton slot='navbar-button' />
-	<FullPage date={today} />
+  <GenerateButton slot="navbar-button" />
+  <FullPage date={today} />
 </Layout>
+
+<h1>Usuarios</h1>
+<ul>
+  {users.map((user) => <li>{user.username}</li>)}
+</ul>
