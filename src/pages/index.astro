@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Debug } from "astro:components";
 
 import dayjs from "dayjs";
 import exMx from "dayjs/locale/es-mx";
@@ -10,8 +11,16 @@ dayjs.locale(exMx);
 
 const today = dayjs();
 
-import { db, User } from "astro:db";
+import { eq } from "astro:db";
+import { db, User, Todo } from "astro:db";
+import { Category } from "astro:db";
 const users = await db.select().from(User);
+const todos = await db
+  .select()
+  .from(Todo)
+  .innerJoin(User, eq(Todo.user_id, User.id))
+  .innerJoin(Category, eq(Todo.category_id, Category.id));
+console.log("Consulta de datos todooooooooooo", todos);
 ---
 
 <Layout
@@ -22,7 +31,12 @@ const users = await db.select().from(User);
   <FullPage date={today} />
 </Layout>
 
-<h1>Usuarios</h1>
+<h1>Todos</h1>
+
 <ul>
-  {users.map((user) => <li>{user.username}</li>)}
+  {
+    todos.map((todo) => (
+      <li>{`Titulo:${todo.Todo.title}, Categoria: ${todo.Category.label}, Creador: ${todo.User.username} `}</li>
+    ))
+  }
 </ul>
