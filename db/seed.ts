@@ -1,4 +1,4 @@
-import { Category, Todo, User, db } from "astro:db";
+import { Certified, Category, Todo, User, db } from "astro:db";
 
 export default async function seed() {
   await db.insert(User).values([
@@ -40,6 +40,20 @@ export default async function seed() {
       description: "Crear anuncio del producto",
       user_id: "xx33@@ds",
       category_id: "ooopd@d",
+    },
+  ]);
+
+  await db.insert(Certified).values([
+    {
+      id: "00001",
+      name: "pepito",
+      course: "software",
+      title: "software developer",
+      branch: "software",
+      mode: "online",
+      day: "12",
+      month: "12",
+      year: "2021",
     },
   ]);
 }

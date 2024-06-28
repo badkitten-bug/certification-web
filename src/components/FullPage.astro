@@ -1,10 +1,14 @@
 ---
+import { db,  } from 'astro:db';
+/* const certified = await db.select().from(Certified);
+ */
 import { Image } from "astro:assets";
-
 import ieeeLogo from "../images/ieee_untels_rgb_stacked_blue.png";
 import escudo from "../images/escudo.png";
 import firmaSteve from "../images/firma steve.png";
 import dayjs from "dayjs";
+
+
 
 interface Props {
   names?: string;

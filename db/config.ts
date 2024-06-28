@@ -25,10 +25,25 @@ const Category = defineTable({
   },
 });
 
+const Certified = defineTable({
+  columns:{
+    id: column.text({primaryKey: true}),
+    name: column.text({unique: true}),
+    course: column.text({unique: true}),
+    title: column.text({unique: true}),
+    branch: column.text({unique: true}),
+    mode: column.text({unique: true}),
+    day: column.text({unique: true}),
+    month: column.text({unique: true}),
+    year: column.text({unique: true}),
+  }
+})
+
 export default defineDb({
   tables: {
     User,
     Todo,
     Category,
+    Certified,
   },
 });
